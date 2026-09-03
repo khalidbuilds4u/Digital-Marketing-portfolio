@@ -108,11 +108,11 @@ export default function Capabilities() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/50 to-black/80" />
               </div>
               
-              {/* The solid background that hides the image when NOT active */}
+              {/* Dim overlay when NOT active to make the active one pop more */}
               <motion.div 
-                className="absolute inset-0 z-10 bg-[var(--color-bg-primary)]"
+                className="absolute inset-0 z-10 bg-black"
                 initial={false}
-                animate={{ opacity: isActive ? 0 : 1 }}
+                animate={{ opacity: isActive ? 0 : 0.4 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               />
 
@@ -124,7 +124,7 @@ export default function Capabilities() {
                     className="text-sm font-mono mt-2"
                     initial={false}
                     animate={{ 
-                      color: isActive ? "rgba(255,255,255,0.8)" : "var(--color-text-secondary)",
+                      color: isActive ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.5)",
                       opacity: isDimmed ? 0.3 : 1
                     }}
                   >
@@ -135,7 +135,7 @@ export default function Capabilities() {
                     className="text-[clamp(3rem,8vw,6rem)] font-display leading-none m-0 drop-shadow-lg"
                     initial={false}
                     animate={{ 
-                      color: isActive ? "#ffffff" : "var(--color-text-primary)",
+                      color: isActive ? "#ffffff" : "rgba(255,255,255,0.7)",
                       opacity: isDimmed ? 0.3 : 1
                     }}
                     transition={{ duration: 0.4 }}
