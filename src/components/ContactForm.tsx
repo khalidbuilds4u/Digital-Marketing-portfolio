@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import BookingModal from "./BookingModal";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,11 +56,21 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="mt-4 flex flex-col items-center">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
+          <button 
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className="inline-flex items-center justify-center px-10 py-5 font-body font-medium text-white bg-[var(--color-accent)] rounded-full transition-all duration-300 hover:bg-[var(--color-accent-hover)] hover:scale-105 min-w-[200px]"
+          >
+            Book a Discovery Call
+          </button>
+          
+          <span className="text-white/40 text-sm uppercase tracking-widest font-medium">Or</span>
+
           <button 
             type="submit" 
             disabled={status !== "idle"}
-            className="inline-flex items-center justify-center px-12 py-5 font-body font-medium text-[var(--color-bg-dark)] bg-white rounded-full transition-all duration-300 hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 min-w-[200px]"
+            className="inline-flex items-center justify-center px-10 py-5 font-body font-medium text-white bg-transparent border border-white/20 rounded-full transition-all duration-300 hover:bg-white/10 hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 min-w-[200px]"
           >
             {status === "idle" && "Send Message"}
             {status === "submitting" && "Sending..."}
@@ -66,6 +78,8 @@ export default function ContactForm() {
           </button>
         </div>
       </form>
+
+      <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }

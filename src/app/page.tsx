@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import ContactForm from "@/components/ContactForm";
 import ProjectCard from "@/components/ProjectCard";
 import CustomCursor from "@/components/CustomCursor";
+import ClientLogos from "@/components/ClientLogos";
 import Capabilities from "@/components/Capabilities";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
@@ -14,6 +15,7 @@ export default function Home() {
       <CustomCursor />
       <Header />
       <Hero />
+      <ClientLogos />
 
       {/* 03. SELECTED WORK */}
       <section className="py-20 md:py-32 px-4 md:px-8 lg:px-16 max-w-[1440px] mx-auto" id="work">
@@ -28,7 +30,7 @@ export default function Home() {
             category="Fashion & Lifestyle"
             service="Brand Identity"
             image="/assets/images/project-1.jpg"
-            href="#"
+            href="/work/maison-noire"
             aspectRatio="21/9"
             priority={true}
           />
@@ -119,7 +121,7 @@ export default function Home() {
             </FadeIn>
             <FadeIn delay={0.4}>
               <div className="pt-4">
-                <Link href="#" className="btn-secondary">Read Full Case Study</Link>
+                <Link href="/work/maison-noire" className="btn-secondary">Read Full Case Study</Link>
               </div>
             </FadeIn>
           </div>

@@ -52,7 +52,7 @@ export default function Header() {
           {["Work", "Capabilities", "About", "Contact"].map((item) => (
             <Link
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`/#${item.toLowerCase()}`}
               className="font-medium relative group"
             >
               {item}
@@ -88,7 +88,7 @@ export default function Header() {
                   transition={{ delay: 0.2 + i * 0.1, duration: 0.4 }}
                 >
                   <Link
-                    href={`#${item.toLowerCase()}`}
+                    href={`/#${item.toLowerCase()}`}
                     className="font-display text-5xl md:text-6xl uppercase tracking-widest text-[var(--color-text-primary)]"
                     onClick={() => setMobileMenuOpen(false)}
                   >
