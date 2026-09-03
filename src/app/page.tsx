@@ -4,6 +4,7 @@ import ContactForm from "@/components/ContactForm";
 import ProjectCard from "@/components/ProjectCard";
 import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
+import SocialFeed from "@/components/SocialFeed";
 import ClientLogos from "@/components/ClientLogos";
 import Capabilities from "@/components/Capabilities";
 import FadeIn from "@/components/FadeIn";
@@ -157,7 +158,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 08. CONTACT & FOOTER */}
+      {/* 08. SOCIAL FEED */}
+      <SocialFeed />
+
+      {/* 09. CONTACT & FOOTER */}
       <footer className="bg-[var(--color-bg-dark)] text-[var(--color-text-light)]" id="contact">
         <div className="py-20 md:py-32 flex flex-col items-center text-center px-4 w-full">
           <FadeIn>
