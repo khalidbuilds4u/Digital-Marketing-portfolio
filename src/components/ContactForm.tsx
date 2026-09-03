@@ -79,24 +79,6 @@ export default function ContactForm() {
         </div>
       </form>
 
-      {/* Social Footer */}
-      <div className="mt-24 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="text-white/40 text-sm font-mono uppercase tracking-widest">
-          © {new Date().getFullYear()} SIGNAL. All rights reserved.
-        </div>
-        <div className="flex gap-8">
-          {["Instagram", "LinkedIn", "X", "TikTok", "Behance"].map((social) => (
-            <a 
-              key={social}
-              href="#"
-              className="text-white/60 hover:text-[var(--color-accent)] text-sm uppercase tracking-widest transition-colors"
-            >
-              {social}
-            </a>
-          ))}
-        </div>
-      </div>
-
       <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
