@@ -86,14 +86,20 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full"
           style={{ x: xMoveFg, y: yMoveFg }}
         >
-          <Image
-            src="/assets/images/hero-lady.png"
-            alt="Signal Agency Lady"
-            fill
-            priority
-            className="object-cover" 
-            sizes="100vw"
-          />
+          <motion.div
+            className="absolute inset-0 w-full h-full"
+            animate={{ y: ["-1.5%", "1.5%", "-1.5%"] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Image
+              src="/assets/images/hero-lady.png"
+              alt="Signal Agency Lady"
+              fill
+              priority
+              className="object-cover" 
+              sizes="100vw"
+            />
+          </motion.div>
         </motion.div>
       </motion.div>
 
@@ -121,22 +127,31 @@ export default function Hero() {
             style={{ opacity: opacityText }}
             className="text-[var(--color-text-light)] drop-shadow-2xl"
           >
-            {titleLines.map((line, index) => (
-              <span key={index} className="block overflow-hidden">
-                <motion.span
-                  className="block"
-                  initial={{ y: "120%" }}
-                  animate={{ y: "0%" }}
-                  transition={{
-                    duration: 1.2,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: 0.3 + index * 0.15,
-                  }}
-                >
-                  {line}
-                </motion.span>
-              </span>
-            ))}
+            {titleLines.map((line, lineIndex) => {
+              const words = line.split(" ");
+              return (
+                <span key={lineIndex} className="block overflow-hidden pb-8 -mb-8">
+                  {words.map((word, wordIndex) => {
+                    const globalIndex = lineIndex * 5 + wordIndex;
+                    return (
+                      <motion.span
+                        key={wordIndex}
+                        className="inline-block mr-[3vw] md:mr-[2vw]"
+                        initial={{ y: "120%", filter: "blur(10px)", opacity: 0 }}
+                        animate={{ y: "0%", filter: "blur(0px)", opacity: 1 }}
+                        transition={{
+                          duration: 1.2,
+                          ease: [0.16, 1, 0.3, 1],
+                          delay: 0.3 + globalIndex * 0.1,
+                        }}
+                      >
+                        {word}
+                      </motion.span>
+                    );
+                  })}
+                </span>
+              );
+            })}
           </motion.h1>
 
         </div>
