@@ -21,14 +21,6 @@ export default function Hero() {
   // Mouse tracking parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
-  // Raw pixel coordinates for the text mask
-  const textMouseX = useMotionValue(0);
-  const textMouseY = useMotionValue(0);
-
-  // Raw pixel coordinates for the background mask
-  const bgMouseX = useMotionValue(0);
-  const bgMouseY = useMotionValue(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -38,22 +30,11 @@ export default function Hero() {
       const y = (e.clientY / innerHeight - 0.5) * 2;
       mouseX.set(x);
       mouseY.set(y);
-      
-      // Set raw pixels for the background (relative to viewport)
-      bgMouseX.set(e.clientX);
-      bgMouseY.set(e.clientY);
-      
-      // Set raw pixels relative to the text container for the text mask
-      if (textRef.current) {
-        const rect = textRef.current.getBoundingClientRect();
-        textMouseX.set(e.clientX - rect.left);
-        textMouseY.set(e.clientY - rect.top);
-      }
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY, textMouseX, textMouseY, bgMouseX, bgMouseY]);
+  }, [mouseX, mouseY]);
 
   // Smooth the mouse values
   const springConfig = { damping: 30, stiffness: 100, mass: 1 };
@@ -63,10 +44,6 @@ export default function Hero() {
   // Transform subtle movement (moving opposite to mouse gives a 3D window effect)
   const xMove = useTransform(smoothX, [-1, 1], ["2%", "-2%"]);
   const yMove = useTransform(smoothY, [-1, 1], ["2%", "-2%"]);
-
-  // Spotlight mask templates
-  const textMask = useMotionTemplate`radial-gradient(450px circle at ${textMouseX}px ${textMouseY}px, black 0%, transparent 100%)`;
-  const bgMask = useMotionTemplate`radial-gradient(600px circle at ${bgMouseX}px ${bgMouseY}px, black 0%, transparent 100%)`;
 
   const titleLines = ["Cut Through", "The Noise."];
 
@@ -93,21 +70,6 @@ export default function Hero() {
             className="object-cover opacity-40 sm:opacity-20 sm:grayscale" 
             sizes="100vw"
           />
-          
-          {/* Bright Spotlight Image */}
-          <motion.div
-            className="absolute inset-0 hidden sm:block [@media(pointer:coarse)]:hidden"
-            style={{ maskImage: bgMask, WebkitMaskImage: bgMask }}
-          >
-            <Image
-              src="/assets/images/hero-1.jpg"
-              alt="Signal Agency Hero Bright"
-              fill
-              priority
-              className="object-cover opacity-80" 
-              sizes="100vw"
-            />
-          </motion.div>
         </motion.div>
         {/* Gradient overlays for better text readability at top and bottom */}
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-dark)] via-transparent to-transparent opacity-80" />
@@ -130,7 +92,7 @@ export default function Hero() {
           {/* Base Text Layer */}
           <motion.h1
             style={{ opacity: opacityText }}
-            className="text-[var(--color-text-light)] drop-shadow-2xl mix-blend-overlay"
+            className="text-[var(--color-text-light)] drop-shadow-2xl"
           >
             {titleLines.map((line, index) => (
               <span key={index} className="block overflow-hidden">
@@ -150,32 +112,6 @@ export default function Hero() {
             ))}
           </motion.h1>
 
-          {/* Spotlight Effect Layer */}
-          <motion.h1
-            style={{ 
-              opacity: opacityText, 
-              maskImage: textMask, 
-              WebkitMaskImage: textMask 
-            }}
-            className="absolute inset-0 text-[var(--color-accent)] drop-shadow-2xl pointer-events-none hidden sm:block [@media(pointer:coarse)]:hidden"
-          >
-            {titleLines.map((line, index) => (
-              <span key={index} className="block overflow-hidden">
-                <motion.span
-                  className="block"
-                  initial={{ y: "120%" }}
-                  animate={{ y: "0%" }}
-                  transition={{
-                    duration: 1.2,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: 0.3 + index * 0.15,
-                  }}
-                >
-                  {line}
-                </motion.span>
-              </span>
-            ))}
-          </motion.h1>
         </div>
 
         <motion.p
