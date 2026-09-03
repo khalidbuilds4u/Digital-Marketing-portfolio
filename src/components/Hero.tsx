@@ -42,8 +42,13 @@ export default function Hero() {
   const smoothY = useSpring(mouseY, springConfig);
 
   // Transform subtle movement (moving opposite to mouse gives a 3D window effect)
-  const xMove = useTransform(smoothX, [-1, 1], ["2%", "-2%"]);
-  const yMove = useTransform(smoothY, [-1, 1], ["2%", "-2%"]);
+  const xMoveBg = useTransform(smoothX, [-1, 1], ["1%", "-1%"]);
+  const yMoveBg = useTransform(smoothY, [-1, 1], ["1%", "-1%"]);
+
+  const xMoveFg = useTransform(smoothX, [-1, 1], ["3%", "-3%"]);
+  const yMoveFg = useTransform(smoothY, [-1, 1], ["3%", "-3%"]);
+
+  const yImageFg = useTransform(scrollYProgress, [0, 1], ["0%", "45%"]);
 
   const titleLines = ["Cut Through", "The Noise."];
 
@@ -52,29 +57,51 @@ export default function Hero() {
       ref={containerRef}
       className="relative w-full h-[100svh] min-h-[600px] sm:min-h-[800px] flex items-center justify-center overflow-hidden bg-[var(--color-bg-dark)]"
     >
-      {/* Background Image with Parallax & Mouse Tracking */}
+      {/* Background Image Layer */}
       <motion.div
-        className="absolute inset-0 w-full h-full scale-105" // Scaled slightly to prevent edges showing on move
+        className="absolute inset-0 w-full h-full scale-110" 
         style={{ y: yImage, scale: scaleImage }}
       >
         <motion.div 
-          className="relative w-full h-full bg-[var(--color-bg-dark)]"
-          style={{ x: xMove, y: yMove }}
+          className="absolute inset-0 w-full h-full bg-[var(--color-bg-dark)]"
+          style={{ x: xMoveBg, y: yMoveBg }}
         >
-          {/* Base Dark/Desaturated Image */}
           <Image
             src="/assets/images/hero-1.jpg"
-            alt="Signal Agency Hero Full Color"
+            alt="Signal Agency Background"
             fill
             priority
             className="object-cover opacity-80" 
             sizes="100vw"
           />
         </motion.div>
-        {/* Gradient overlays for better text readability at top and bottom */}
+      </motion.div>
+
+      {/* Foreground Lady Layer */}
+      <motion.div
+        className="absolute inset-0 w-full h-full scale-110 pointer-events-none" 
+        style={{ y: yImageFg, scale: scaleImage }}
+      >
+        <motion.div 
+          className="absolute inset-0 w-full h-full"
+          style={{ x: xMoveFg, y: yMoveFg }}
+        >
+          <Image
+            src="/assets/images/hero-lady.png"
+            alt="Signal Agency Lady"
+            fill
+            priority
+            className="object-cover" 
+            sizes="100vw"
+          />
+        </motion.div>
+      </motion.div>
+
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-dark)] via-transparent to-transparent opacity-80" />
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-bg-dark)] via-transparent to-transparent opacity-60 h-[30%]" />
-      </motion.div>
+      </div>
 
       {/* Foreground Content */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 flex flex-col items-center text-center">
