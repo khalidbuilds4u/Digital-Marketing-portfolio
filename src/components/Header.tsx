@@ -2,11 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +39,7 @@ export default function Header() {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         isScrolled
           ? "py-4 bg-[var(--color-bg-primary)]/90 backdrop-blur-md border-b border-[var(--color-border)] text-[var(--color-text-primary)]"
-          : "py-8 bg-transparent text-[var(--color-text-light)]"
+          : `py-8 bg-transparent ${isHomePage ? "text-[var(--color-text-light)]" : "text-[var(--color-text-primary)]"}`
       }`}
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 flex justify-between items-center">
