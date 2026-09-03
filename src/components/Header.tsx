@@ -16,6 +16,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -61,20 +73,28 @@ export default function Header() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: "-100%" }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 w-full bg-[var(--color-bg-primary)] border-b border-[var(--color-border)] flex flex-col p-8 gap-6 md:hidden shadow-xl"
+              exit={{ opacity: 0, y: "-100%" }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed top-0 left-0 w-full h-[100dvh] bg-[var(--color-bg-primary)] z-40 flex flex-col items-center justify-center p-8 gap-8 md:hidden"
             >
-              {["Work", "Capabilities", "About", "Contact"].map((item) => (
-                <Link
+              {["Work", "Capabilities", "About", "Contact"].map((item, i) => (
+                <motion.div
                   key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="font-medium text-2xl"
-                  onClick={() => setMobileMenuOpen(false)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ delay: 0.2 + i * 0.1, duration: 0.4 }}
                 >
-                  {item}
-                </Link>
+                  <Link
+                    href={`#${item.toLowerCase()}`}
+                    className="font-display text-5xl md:text-6xl uppercase tracking-widest text-[var(--color-text-primary)]"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                </motion.div>
               ))}
             </motion.div>
           )}

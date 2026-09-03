@@ -73,7 +73,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-[var(--color-bg-dark)]"
+      className="relative w-full h-[100svh] min-h-[600px] sm:min-h-[800px] flex items-center justify-center overflow-hidden bg-[var(--color-bg-dark)]"
     >
       {/* Background Image with Parallax & Mouse Tracking */}
       <motion.div
@@ -90,13 +90,13 @@ export default function Hero() {
             alt="Signal Agency Hero Dark"
             fill
             priority
-            className="object-cover opacity-20 grayscale" 
+            className="object-cover opacity-40 sm:opacity-20 sm:grayscale" 
             sizes="100vw"
           />
           
           {/* Bright Spotlight Image */}
           <motion.div
-            className="absolute inset-0"
+            className="absolute inset-0 hidden sm:block [@media(pointer:coarse)]:hidden"
             style={{ maskImage: bgMask, WebkitMaskImage: bgMask }}
           >
             <Image
@@ -157,7 +157,7 @@ export default function Hero() {
               maskImage: textMask, 
               WebkitMaskImage: textMask 
             }}
-            className="absolute inset-0 text-[var(--color-accent)] drop-shadow-2xl pointer-events-none"
+            className="absolute inset-0 text-[var(--color-accent)] drop-shadow-2xl pointer-events-none hidden sm:block [@media(pointer:coarse)]:hidden"
           >
             {titleLines.map((line, index) => (
               <span key={index} className="block overflow-hidden">

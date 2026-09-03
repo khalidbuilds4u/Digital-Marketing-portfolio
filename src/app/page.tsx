@@ -10,13 +10,13 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-screen cursor-none md:cursor-auto">
+    <main className="min-h-screen [@media(pointer:fine)]:cursor-none">
       <CustomCursor />
       <Header />
       <Hero />
 
       {/* 03. SELECTED WORK */}
-      <section className="py-32 px-4 md:px-8 lg:px-16 max-w-[1440px] mx-auto" id="work">
+      <section className="py-20 md:py-32 px-4 md:px-8 lg:px-16 max-w-[1440px] mx-auto" id="work">
         <FadeIn>
           <h2 className="text-4xl md:text-5xl lg:text-6xl mb-16">Selected Work</h2>
         </FadeIn>
@@ -70,7 +70,7 @@ export default function Home() {
       </section>
 
       {/* 04. MANIFESTO */}
-      <section className="py-32 bg-[var(--color-bg-dark)] text-[var(--color-text-light)] flex items-center min-h-[70vh]">
+      <section className="py-20 md:py-32 bg-[var(--color-bg-dark)] text-[var(--color-text-light)] flex items-center min-h-[70vh]">
         <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 text-center w-full">
           <FadeIn>
             <h2 className="text-[clamp(2rem,5vw,4rem)] max-w-4xl mx-auto leading-[1.2]">
@@ -91,7 +91,7 @@ export default function Home() {
       <Capabilities />
 
       {/* 06. FEATURED CASE STUDY */}
-      <section className="py-16 px-4 md:px-8 lg:px-16 max-w-[1440px] mx-auto">
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 max-w-[1440px] mx-auto">
         <FadeIn>
           <div className="text-sm uppercase tracking-widest text-[var(--color-text-secondary)] mb-4">Featured Case Study</div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl mb-16">Maison Noire</h2>
@@ -133,7 +133,7 @@ export default function Home() {
       </section>
 
       {/* 07. ABOUT */}
-      <section className="py-32 px-4 md:px-8 lg:px-16 max-w-[1440px] mx-auto" id="about">
+      <section className="py-20 md:py-32 px-4 md:px-8 lg:px-16 max-w-[1440px] mx-auto" id="about">
         <h2 className="text-4xl md:text-5xl lg:text-6xl mb-16">About Us</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
@@ -155,7 +155,7 @@ export default function Home() {
 
       {/* 08. CONTACT & FOOTER */}
       <footer className="bg-[var(--color-bg-dark)] text-[var(--color-text-light)]" id="contact">
-        <div className="py-32 flex flex-col items-center text-center px-4 w-full">
+        <div className="py-20 md:py-32 flex flex-col items-center text-center px-4 w-full">
           <FadeIn>
             <h2 className="text-[clamp(3rem,8vw,5rem)] max-w-4xl mx-auto mb-4 leading-tight">
               Have a brand that deserves better?

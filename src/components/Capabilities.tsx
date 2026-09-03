@@ -53,7 +53,7 @@ const capabilities = [
 ];
 
 export default function Capabilities() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
     <section className="py-24" id="capabilities">
@@ -66,19 +66,32 @@ export default function Capabilities() {
 
       <div className="w-full flex flex-col border-b border-[var(--color-border)]">
         {capabilities.map((cap, index) => {
-          const isHovered = hoveredIndex === index;
-          const isDimmed = hoveredIndex !== null && !isHovered;
+          const isActive = activeIndex === index;
+          const isDimmed = activeIndex !== null && !isActive;
 
           return (
             <motion.div
               key={cap.id}
               className="relative w-full border-t border-[var(--color-border)] overflow-hidden cursor-pointer group"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              onMouseEnter={() => {
+                if (typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+                  setActiveIndex(index);
+                }
+              }}
+              onMouseLeave={() => {
+                if (typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+                  setActiveIndex(null);
+                }
+              }}
+              onClick={() => {
+                if (typeof window !== "undefined" && window.matchMedia("(hover: none), (pointer: coarse)").matches) {
+                  setActiveIndex(activeIndex === index ? null : index);
+                }
+              }}
               initial={false}
               animate={{ 
-                height: isHovered ? "60vh" : "15vh",
-                minHeight: isHovered ? "400px" : "120px" 
+                height: isActive ? "60vh" : "15vh",
+                minHeight: isActive ? "400px" : "120px" 
               }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
@@ -95,11 +108,11 @@ export default function Capabilities() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/50 to-black/80" />
               </div>
               
-              {/* The solid background that hides the image when NOT hovered */}
+              {/* The solid background that hides the image when NOT active */}
               <motion.div 
-                className="absolute inset-0 z-10 bg-[var(--color-bg-light)]"
+                className="absolute inset-0 z-10 bg-[var(--color-bg-primary)]"
                 initial={false}
-                animate={{ opacity: isHovered ? 0 : 1 }}
+                animate={{ opacity: isActive ? 0 : 1 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               />
 
@@ -111,7 +124,7 @@ export default function Capabilities() {
                     className="text-sm font-mono mt-2"
                     initial={false}
                     animate={{ 
-                      color: isHovered ? "rgba(255,255,255,0.8)" : "var(--color-text-secondary)",
+                      color: isActive ? "rgba(255,255,255,0.8)" : "var(--color-text-secondary)",
                       opacity: isDimmed ? 0.3 : 1
                     }}
                   >
@@ -122,7 +135,7 @@ export default function Capabilities() {
                     className="text-[clamp(3rem,8vw,6rem)] font-display leading-none m-0 drop-shadow-lg"
                     initial={false}
                     animate={{ 
-                      color: isHovered ? "#ffffff" : "var(--color-text-primary)",
+                      color: isActive ? "#ffffff" : "var(--color-text-primary)",
                       opacity: isDimmed ? 0.3 : 1
                     }}
                     transition={{ duration: 0.4 }}
@@ -132,7 +145,7 @@ export default function Capabilities() {
                 </div>
 
                 <AnimatePresence>
-                  {isHovered && (
+                  {isActive && (
                     <motion.div
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}

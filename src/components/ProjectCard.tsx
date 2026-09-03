@@ -42,7 +42,7 @@ export default function ProjectCard({
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], ["-3deg", "3deg"]), springConfig);
 
   const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (!cardRef.current) return;
+    if (!cardRef.current || (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches)) return;
     const rect = cardRef.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
