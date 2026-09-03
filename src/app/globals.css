@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #F5F2EE;
+  --color-bg-dark: #1A1A1A;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B6459;
+  --color-text-light: #ECECEC;
+  --color-accent: #C4722F;
+  --color-accent-hover: #A85D22;
+  --color-border: #D9D4CD;
+  --color-border-dark: #333333;
+
+  --font-display: var(--font-instrument-serif), serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+}
+
+@layer base {
+  html, body {
+    @apply bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] font-body antialiased selection:bg-[var(--color-accent)] selection:text-white;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight leading-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 font-body font-medium text-white bg-[var(--color-accent)] rounded-full transition-all duration-300 hover:bg-[var(--color-accent-hover)] hover:-translate-y-1;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 font-body font-medium text-[var(--color-text-primary)] bg-transparent border border-[var(--color-text-primary)] rounded-full transition-all duration-300 hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)];
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-2 font-medium relative;
+  }
+  .link-arrow::after {
+    content: '→';
+    @apply transition-transform duration-300;
+  }
+  .link-arrow:hover::after {
+    @apply translate-x-1;
+  }
+  .link-arrow.down::after {
+    content: '↓';
+  }
+  .link-arrow.down:hover::after {
+    @apply translate-y-1;
+  }
+}
