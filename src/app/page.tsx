@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import ContactForm from "@/components/ContactForm";
 import ProjectCard from "@/components/ProjectCard";
 import CustomCursor from "@/components/CustomCursor";
+import Preloader from "@/components/Preloader";
 import ClientLogos from "@/components/ClientLogos";
 import Capabilities from "@/components/Capabilities";
 import FadeIn from "@/components/FadeIn";
@@ -12,6 +13,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen [@media(pointer:fine)]:cursor-none">
+      <Preloader />
       <CustomCursor />
       <Header />
       <Hero />
