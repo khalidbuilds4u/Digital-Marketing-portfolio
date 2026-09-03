@@ -64,10 +64,10 @@ export default function Hero() {
           {/* Base Dark/Desaturated Image */}
           <Image
             src="/assets/images/hero-1.jpg"
-            alt="Signal Agency Hero Dark"
+            alt="Signal Agency Hero Full Color"
             fill
             priority
-            className="object-cover opacity-40 sm:opacity-20 sm:grayscale" 
+            className="object-cover opacity-80" 
             sizes="100vw"
           />
         </motion.div>
