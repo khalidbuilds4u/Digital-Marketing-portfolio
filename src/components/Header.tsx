@@ -52,13 +52,19 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-8 items-center">
-          {["Work", "Capabilities", "About", "Contact"].map((item) => (
+          {[
+            { name: "Work", href: "/#work" },
+            { name: "Capabilities", href: "/#capabilities" },
+            { name: "About", href: "/#about" },
+            { name: "Insights", href: "/insights" },
+            { name: "Contact", href: "/#contact" }
+          ].map((item) => (
             <Link
-              key={item}
-              href={`/#${item.toLowerCase()}`}
+              key={item.name}
+              href={item.href}
               className="font-medium relative group"
             >
-              {item}
+              {item.name}
               <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-current origin-right scale-x-0 transition-transform duration-300 group-hover:origin-left group-hover:scale-x-100" />
             </Link>
           ))}
@@ -82,20 +88,26 @@ export default function Header() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="fixed top-0 left-0 w-full h-[100dvh] bg-[var(--color-bg-primary)] z-40 flex flex-col items-center justify-center p-8 gap-8 md:hidden"
             >
-              {["Work", "Capabilities", "About", "Contact"].map((item, i) => (
+              {[
+                { name: "Work", href: "/#work" },
+                { name: "Capabilities", href: "/#capabilities" },
+                { name: "About", href: "/#about" },
+                { name: "Insights", href: "/insights" },
+                { name: "Contact", href: "/#contact" }
+              ].map((item, i) => (
                 <motion.div
-                  key={item}
+                  key={item.name}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: 0.2 + i * 0.1, duration: 0.4 }}
                 >
                   <Link
-                    href={`/#${item.toLowerCase()}`}
+                    href={item.href}
                     className="font-display text-5xl md:text-6xl uppercase tracking-widest text-[var(--color-text-primary)]"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </motion.div>
               ))}

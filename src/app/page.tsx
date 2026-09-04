@@ -209,6 +209,7 @@ export default function Home() {
               <Link href="#work" className="hover:text-[var(--color-accent)] transition-colors">Work</Link>
               <Link href="#capabilities" className="hover:text-[var(--color-accent)] transition-colors">Capabilities</Link>
               <Link href="#about" className="hover:text-[var(--color-accent)] transition-colors">About</Link>
+              <Link href="/insights" className="hover:text-[var(--color-accent)] transition-colors">Insights</Link>
               <Link href="#contact" className="hover:text-[var(--color-accent)] transition-colors">Contact</Link>
             </nav>
           </div>
