@@ -7,6 +7,7 @@ import Preloader from "@/components/Preloader";
 import SocialFeed from "@/components/SocialFeed";
 import ClientLogos from "@/components/ClientLogos";
 import Capabilities from "@/components/Capabilities";
+import Testimonials from "@/components/Testimonials";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import Link from "next/link";
@@ -123,6 +124,25 @@ export default function Home() {
               </div>
             </FadeIn>
             <FadeIn delay={0.4}>
+              <div className="border-t border-[var(--color-border)] pt-6">
+                <h4 className="text-sm uppercase tracking-widest text-[var(--color-text-secondary)] mb-6">The Results</h4>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <div className="text-3xl md:text-4xl font-display text-[var(--color-accent)] mb-1">+150%</div>
+                    <div className="text-sm text-[var(--color-text-secondary)] uppercase tracking-wider">ROAS</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl md:text-4xl font-display text-[var(--color-accent)] mb-1">-42%</div>
+                    <div className="text-sm text-[var(--color-text-secondary)] uppercase tracking-wider">CAC</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl md:text-4xl font-display text-[var(--color-accent)] mb-1">$2.4M</div>
+                    <div className="text-sm text-[var(--color-text-secondary)] uppercase tracking-wider">Revenue</div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.5}>
               <div className="pt-4">
                 <Link href="/work/maison-noire" className="btn-secondary">Read Full Case Study</Link>
               </div>
@@ -161,7 +181,10 @@ export default function Home() {
       {/* 08. SOCIAL FEED */}
       <SocialFeed />
 
-      {/* 09. CONTACT & FOOTER */}
+      {/* 09. TESTIMONIALS */}
+      <Testimonials />
+
+      {/* 10. CONTACT & FOOTER */}
       <footer className="bg-[var(--color-bg-dark)] text-[var(--color-text-light)]" id="contact">
         <div className="py-20 md:py-32 flex flex-col items-center text-center px-4 w-full">
           <FadeIn>

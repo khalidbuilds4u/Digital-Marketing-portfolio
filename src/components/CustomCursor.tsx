@@ -59,7 +59,7 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-24 h-24 rounded-full pointer-events-none z-[100] flex items-center justify-center mix-blend-difference overflow-hidden"
+      className="fixed top-0 left-0 pointer-events-none z-[100] flex items-center justify-center mix-blend-difference overflow-hidden rounded-full bg-white"
       style={{
         x: smoothX,
         y: smoothY,
@@ -67,15 +67,20 @@ export default function CustomCursor() {
         translateY: "-50%",
       }}
       animate={{
-        scale: isHoveringProject ? 1 : 0,
-        opacity: isHoveringProject ? 1 : 0,
+        width: isHoveringProject ? 96 : 12,
+        height: isHoveringProject ? 96 : 12,
+        opacity: 1,
       }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
-      <div className="absolute inset-0 bg-white rounded-full opacity-100 scale-100" />
-      <span className="relative z-10 text-[var(--color-bg-dark)] font-body font-medium text-sm tracking-widest uppercase mix-blend-normal">
+      <motion.span 
+        className="text-[var(--color-bg-dark)] font-body font-medium text-sm tracking-widest uppercase"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isHoveringProject ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+      >
         View
-      </span>
+      </motion.span>
     </motion.div>
   );
 }
