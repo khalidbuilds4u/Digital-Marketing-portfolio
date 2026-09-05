@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const phoneNumber = "919876543210"; // Replace with your actual WhatsApp number
+  const phoneNumber = "YOUR_WHATSAPP_NUMBER_HERE"; // Replace with your actual WhatsApp number
   const defaultMessage = encodeURIComponent(
     "Hi SIGNAL! I'm interested in discussing a project. Can we chat?"
   );
