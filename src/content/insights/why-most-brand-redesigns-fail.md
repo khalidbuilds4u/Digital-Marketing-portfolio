@@ -3,6 +3,7 @@ title: "Why Most Brand Redesigns Fail Before They Start"
 date: "Sep 04, 2026"
 category: "Strategy"
 author: "Jane Doe"
+heroImage: "/assets/images/cap-strategy.jpg"
 ---
 
 Most brand redesigns are doomed from the brief. Companies often approach a rebrand as a cosmetic exercise—a new logo, a fresh color palette, and maybe a slightly updated typographic system.

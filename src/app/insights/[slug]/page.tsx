@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import CustomCursor from "@/components/CustomCursor";
 import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
+import Image from "next/image";
 import { getInsightData, getInsights } from "@/lib/mdx";
 import { notFound } from "next/navigation";
 
@@ -47,6 +48,22 @@ export default async function ArticlePage({ params }: { params: { slug: string }
             <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-display leading-tight">{article.title}</h1>
           </div>
         </FadeIn>
+
+        {/* Hero Image */}
+        {article.heroImage && (
+          <FadeIn delay={0.15}>
+            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-16 shadow-2xl">
+              <Image 
+                src={article.heroImage} 
+                alt={article.title} 
+                fill 
+                className="object-cover"
+                sizes="(max-width: 1000px) 100vw, 1000px"
+                priority
+              />
+            </div>
+          </FadeIn>
+        )}
 
         {/* Article Content */}
         <FadeIn delay={0.2}>

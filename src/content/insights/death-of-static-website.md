@@ -3,6 +3,7 @@ title: "The Death of the Static Website (And What's Next)"
 date: "Aug 21, 2026"
 category: "Digital"
 author: "Khalid"
+heroImage: "/assets/images/cap-digital.jpg"
 ---
 
 For fifteen years, the static website was the gold standard. A homepage, an about page, a contact form. Maybe a blog if you were feeling adventurous. It worked because the internet was simple and attention was cheap.

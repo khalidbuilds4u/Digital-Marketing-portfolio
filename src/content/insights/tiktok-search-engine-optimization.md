@@ -3,6 +3,7 @@ title: "TikTok is a Search Engine: Optimizing for the New Feed"
 date: "Aug 12, 2026"
 category: "Social"
 author: "Khalid"
+heroImage: "/assets/images/cap-content.jpg"
 ---
 
 Google isn't the only search engine anymore. According to internal data from Google itself, nearly 40% of Gen Z users turn to TikTok or Instagram when searching for a place to eat, a product to buy, or a service to hire.

@@ -3,6 +3,7 @@ title: "How to Measure ROI on 'Unmeasurable' Creative"
 date: "Jul 28, 2026"
 category: "Performance"
 author: "Khalid"
+heroImage: "/assets/images/cap-creative.jpg"
 ---
 
 Every CMO has heard this line from their creative agency: "Brand awareness is hard to measure." It's the oldest excuse in advertising, and it's lazy.
