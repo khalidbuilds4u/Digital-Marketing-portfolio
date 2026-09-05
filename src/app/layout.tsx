@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
@@ -69,6 +70,7 @@ export default function RootLayout({
         className={`${inter.variable} ${instrumentSerif.variable} antialiased`}
       >
         <SmoothScroll>{children}</SmoothScroll>
+        <WhatsAppButton />
         <Analytics />
       </body>
     </html>
