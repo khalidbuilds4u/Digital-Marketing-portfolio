@@ -11,6 +11,9 @@ import Testimonials from "@/components/Testimonials";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const SplineScene = dynamic(() => import('@/components/SplineScene'), { ssr: false });
 
 export default function Home() {
   return (
@@ -76,10 +79,19 @@ export default function Home() {
       </section>
 
       {/* 04. MANIFESTO */}
-      <section className="py-20 md:py-32 bg-[var(--color-bg-dark)] text-[var(--color-text-light)] flex items-center min-h-[70vh]">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 text-center w-full">
+      <section className="py-20 md:py-32 bg-[var(--color-bg-dark)] text-[var(--color-text-light)] flex items-center min-h-[70vh] relative overflow-hidden">
+        
+        {/* 3D Spline Background */}
+        <div className="absolute inset-0 w-full h-full opacity-60 pointer-events-auto">
+          <SplineScene />
+        </div>
+        
+        {/* Gradient Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-dark)] via-transparent to-[var(--color-bg-dark)] pointer-events-none" />
+
+        <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 text-center w-full relative z-10 pointer-events-none">
           <FadeIn>
-            <h2 className="text-[clamp(2rem,5vw,4rem)] max-w-4xl mx-auto leading-[1.2]">
+            <h2 className="text-[clamp(2rem,5vw,4rem)] max-w-4xl mx-auto leading-[1.2] mix-blend-difference">
               <span className="block mb-4 text-white/70">Every brand is fighting for</span>
               <span className="block mb-4 text-white/70">the same thing — attention.</span>
               

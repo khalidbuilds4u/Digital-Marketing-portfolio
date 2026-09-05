@@ -5,18 +5,40 @@ import { useState } from "react";
 import BookingModal from "./BookingModal";
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("submitting");
-    // Simulate network request
-    setTimeout(() => {
-      setStatus("success");
-      // Reset after 3 seconds
-      setTimeout(() => setStatus("idle"), 3000);
-    }, 1500);
+    
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        e.currentTarget.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      setStatus("error");
+    }
+
+    setTimeout(() => setStatus("idle"), 3000);
   };
 
   return (
@@ -28,6 +50,7 @@ export default function ContactForm() {
             <input 
               type="text" 
               id="name" 
+              name="name"
               required
               className="bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-[var(--color-accent)] transition-colors rounded-none"
               placeholder="Jane Doe"
@@ -38,6 +61,7 @@ export default function ContactForm() {
             <input 
               type="email" 
               id="email" 
+              name="email"
               required
               className="bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-[var(--color-accent)] transition-colors rounded-none"
               placeholder="jane@example.com"
@@ -49,6 +73,7 @@ export default function ContactForm() {
           <label htmlFor="message" className="text-xs uppercase tracking-widest text-white/60">Tell us about your project</label>
           <textarea 
             id="message" 
+            name="message"
             required
             rows={4}
             className="bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-[var(--color-accent)] transition-colors resize-none rounded-none"
@@ -75,6 +100,7 @@ export default function ContactForm() {
             {status === "idle" && "Send Message"}
             {status === "submitting" && "Sending..."}
             {status === "success" && "Message Sent!"}
+            {status === "error" && "Error Sending"}
           </button>
         </div>
       </form>

@@ -1,42 +1,23 @@
-"use client";
-
 import Header from "@/components/Header";
 import CustomCursor from "@/components/CustomCursor";
 import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { getInsightData, getInsights } from "@/lib/mdx";
+import { notFound } from "next/navigation";
 
-// Placeholder data for insights
-const articles = {
-  "why-most-brand-redesigns-fail": {
-    title: "Why Most Brand Redesigns Fail Before They Start",
-    date: "Sep 04, 2026",
-    category: "Strategy",
-    author: "Jane Doe",
-    content: `
-      <p>Most brand redesigns are doomed from the brief. Companies often approach a rebrand as a cosmetic exercise—a new logo, a fresh color palette, and maybe a slightly updated typographic system.</p>
-      
-      <p>But a brand is not just what it looks like. It is how it behaves, how it speaks, and fundamentally, what it stands for in the mind of the consumer. When you only change the surface without addressing the core strategy, you aren't rebranding. You are just repainting a house with a crumbling foundation.</p>
-      
-      <h3>The Strategy Gap</h3>
-      <p>The most common reason for failure is the disconnect between business objectives and creative execution. A founder might say, "We want to look more premium," but what they actually need is a strategy to justify a 20% price increase.</p>
-      
-      <p>Before designing a single pixel, an agency must ask:</p>
-      <ul>
-        <li>Who are we actually trying to attract that we aren't currently?</li>
-        <li>What is the cost of staying exactly the same?</li>
-        <li>Does the product experience match the new brand promise?</li>
-      </ul>
-      
-      <p>If you don't have clear, mathematically backed answers to these questions, put the design tools away. You need to do the hard strategic work first.</p>
-    `
+export async function generateStaticParams() {
+  const articles = getInsights();
+  return articles.map((article) => ({
+    slug: article.slug,
+  }));
+}
+
+export default async function ArticlePage({ params }: { params: { slug: string } }) {
+  const article = getInsightData(params.slug);
+
+  if (!article) {
+    notFound();
   }
-};
-
-export default function ArticlePage() {
-  const params = useParams();
-  const slug = params.slug as string;
-  const article = articles[slug as keyof typeof articles] || articles["why-most-brand-redesigns-fail"];
 
   return (
     <main className="min-h-screen bg-[var(--color-bg-primary)] [@media(pointer:fine)]:cursor-none">
@@ -74,7 +55,7 @@ export default function ArticlePage() {
                        prose-headings:font-display prose-headings:font-normal prose-headings:mt-16 prose-headings:mb-8
                        prose-p:mb-8 prose-ul:mb-8 prose-li:mb-4
                        prose-a:text-[var(--color-accent)] hover:prose-a:text-[var(--color-text-primary)]"
-            dangerouslySetInnerHTML={{ __html: article.content }}
+            dangerouslySetInnerHTML={{ __html: article.contentHtml }}
           />
         </FadeIn>
 
