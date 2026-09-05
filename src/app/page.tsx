@@ -11,9 +11,7 @@ import Testimonials from "@/components/Testimonials";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-
-const SplineScene = dynamic(() => import('@/components/SplineScene'), { ssr: false });
+import SplineScene from "@/components/SplineScene";
 
 export default function Home() {
   return (
